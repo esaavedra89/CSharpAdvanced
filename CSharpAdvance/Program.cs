@@ -1,5 +1,6 @@
 ﻿using CSharpAdvance.Delegates;
 using CSharpAdvance.Generics;
+using CSharpAdvance.LambdaExpressions;
 using System;
 
 namespace CSharpAdvance
@@ -44,28 +45,82 @@ namespace CSharpAdvance
             #endregion
 
             #region Delegates
-            // Instances.
-            var photoProcessor = new PhotoProcessor();
-            var filters = new PhotoFilters();
 
-            // We apply the delegate with methods.
-            // We can use this created in a class or use the default Action<> or Func<>
-            //PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
-            Action<Photo> filterHandler = filters.ApplyBrightness;
-            filterHandler += filters.ApplyContast;
-            filterHandler += filters.ApplyResize;
-            // Using a method created here.
-            filterHandler += RemoveRedEyesFilter;
-            photoProcessor.Process("photo.png", filterHandler); 
+            // Instances.
+            //var photoProcessor = new PhotoProcessor();
+            //var filters = new PhotoFilters();
+
+            //// We apply the delegate with methods.
+            //// We can use this created in a class or use the default Action<> or Func<>
+            ////PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
+            //Action<Photo> filterHandler = filters.ApplyBrightness;
+            //filterHandler += filters.ApplyContast;
+            //filterHandler += filters.ApplyResize;
+            //// Using a method created here.
+            //filterHandler += RemoveRedEyesFilter;
+            //photoProcessor.Process("photo.png", filterHandler);
+
             #endregion
+
+            // asrg => expression
+            // number => number*number;
+
+            // () => ... without arguments
+            // x => ... one  argument
+            // (x, y, z) => ... more arguments
+            // Func<int, int> square = number => number * number;
+
+            //// Variable.
+            //const int factor = 5;
+
+            //// Delegate with argument.
+            //Func<int, int> multipler = n => n * factor;
+
+            //// Result.
+            //var result = multipler(10);
+
+            // We instanciate the BookRepository and once execute the GetBook method.
+            var books = new BookRepository().GetBook();
+
+            // Find all that satisface that method.
+            //       var cheapBooks = books.FindAll(IsCheaperThan10Dollars);
+            // We can achive this, without using the IsCheaperThan10Dollars methods, only using 
+            // Lambda expressions
+
+            // We get all Book objects, when the Price is < 10.
+            //var cheapBooks = books.FindAll(book => book.Price < 10);
+            var cheapBooks = books.FindAll(b => b.Price < 10);
+
+            for (int i = 0; i < cheapBooks.Count; i++)
+            {
+                // sHOW THE RESULT.
+                Console.WriteLine(cheapBooks[i].Title);
+            }
         }
 
         #region Delegates
+
         // Custom methods to show how to use another method in that delegate.
-        static void RemoveRedEyesFilter(Photo photo)
-        {
-            Console.WriteLine("Apply RemoveRedEyes");
-        } 
+        //static void RemoveRedEyesFilter(Photo photo)
+        //{
+        //    Console.WriteLine("Apply RemoveRedEyes");
+        //} 
+
+        #endregion
+
+        #region LambdaExpressions
+        //static int Square(int number)
+        //{
+        //    return number * number;
+        //} 
+
+        //static bool IsCheaperThan10Dollars(Book book) 
+        //{
+        //    // if book.Price < 10 return true, else return false.
+        //    // Here we are making a comparition.
+        //    return book.Price < 10;
+        //}
         #endregion
     }
 }
+ 
