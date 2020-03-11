@@ -1,7 +1,7 @@
 ﻿using CSharpAdvance.Delegates;
+using CSharpAdvance.Events;
 using CSharpAdvance.Generics;
 using CSharpAdvance.LambdaExpressions;
-using System;
 
 namespace CSharpAdvance
 {
@@ -62,6 +62,7 @@ namespace CSharpAdvance
 
             #endregion
 
+            #region Lambda Expressions
             // asrg => expression
             // number => number*number;
 
@@ -79,23 +80,39 @@ namespace CSharpAdvance
             //// Result.
             //var result = multipler(10);
 
-            // We instanciate the BookRepository and once execute the GetBook method.
-            var books = new BookRepository().GetBook();
-
             // Find all that satisface that method.
             //       var cheapBooks = books.FindAll(IsCheaperThan10Dollars);
             // We can achive this, without using the IsCheaperThan10Dollars methods, only using 
             // Lambda expressions
 
+            // We instanciate the BookRepository and once execute the GetBook method.
+            //var books = new BookRepository().GetBook();
+
             // We get all Book objects, when the Price is < 10.
             //var cheapBooks = books.FindAll(book => book.Price < 10);
-            var cheapBooks = books.FindAll(b => b.Price < 10);
+            //var cheapBooks = books.FindAll(b => b.Price < 10);
 
-            for (int i = 0; i < cheapBooks.Count; i++)
-            {
-                // sHOW THE RESULT.
-                Console.WriteLine(cheapBooks[i].Title);
-            }
+            //for (int i = 0; i < cheapBooks.Count; i++)
+            //{
+            //    // sHOW THE RESULT.
+            //    Console.WriteLine(cheapBooks[i].Title);
+            //} 
+            #endregion
+
+            #region Events
+            // Instances.
+            var video = new Video() { Title = "video 1" };
+            //var videoEncoder = new VideoEncoder(); // Publisher.
+            var videoEncoder = new VideoEncoder2(); // Publisher.
+            var mailService = new MailService(); // Subscriber.
+            var messageService = new MessageService(); // Subscriber.
+            // We make the subscription of the methods OnVideoEncoded.
+            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;// This is a pointer, we just name the method, not called.
+            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;// Subscribe.
+
+            // Excecute the method.
+            videoEncoder.Encode(video); 
+            #endregion
         }
 
         #region Delegates
@@ -123,4 +140,3 @@ namespace CSharpAdvance
         #endregion
     }
 }
- 
