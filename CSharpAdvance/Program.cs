@@ -1,7 +1,9 @@
 ﻿using CSharpAdvance.Delegates;
 using CSharpAdvance.Events;
+using CSharpAdvance.ExtensionMethods;
 using CSharpAdvance.Generics;
 using CSharpAdvance.LambdaExpressions;
+using System;
 
 namespace CSharpAdvance
 {
@@ -101,18 +103,24 @@ namespace CSharpAdvance
 
             #region Events
             // Instances.
-            var video = new Video() { Title = "video 1" };
-            //var videoEncoder = new VideoEncoder(); // Publisher.
-            var videoEncoder = new VideoEncoder2(); // Publisher.
-            var mailService = new MailService(); // Subscriber.
-            var messageService = new MessageService(); // Subscriber.
-            // We make the subscription of the methods OnVideoEncoded.
-            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;// This is a pointer, we just name the method, not called.
-            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;// Subscribe.
+            //var video = new Video() { Title = "video 1" };
+            ////var videoEncoder = new VideoEncoder(); // Publisher.
+            //var videoEncoder = new VideoEncoder2(); // Publisher.
+            //var mailService = new MailService(); // Subscriber.
+            //var messageService = new MessageService(); // Subscriber.
+            //// We make the subscription of the methods OnVideoEncoded.
+            //videoEncoder.VideoEncoded += mailService.OnVideoEncoded;// This is a pointer, we just name the method, not called.
+            //videoEncoder.VideoEncoded += messageService.OnVideoEncoded;// Subscribe.
 
-            // Excecute the method.
-            videoEncoder.Encode(video); 
+            //// Excecute the method.
+            //videoEncoder.Encode(video); 
             #endregion
+
+            string post = "this is a supposed to be a very long  blog post blah blah blah";
+
+            var shortenedPost = post.Shorten(5);
+
+            Console.WriteLine(shortenedPost);
         }
 
         #region Delegates
@@ -138,5 +146,7 @@ namespace CSharpAdvance
         //    return book.Price < 10;
         //}
         #endregion
+
+        
     }
 }
