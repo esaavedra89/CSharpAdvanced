@@ -4,6 +4,7 @@ using CSharpAdvance.ExtensionMethods;
 using CSharpAdvance.Generics;
 using CSharpAdvance.LambdaExpressions;
 using System;
+using System.Linq;
 
 namespace CSharpAdvance
 {
@@ -116,11 +117,62 @@ namespace CSharpAdvance
             //videoEncoder.Encode(video); 
             #endregion
 
-            string post = "this is a supposed to be a very long  blog post blah blah blah";
+            //string post = "this is a supposed to be a very long  blog post blah blah blah";
 
-            var shortenedPost = post.Shorten(5);
+            //var shortenedPost = post.Shorten(5);
 
-            Console.WriteLine(shortenedPost);
+            //Console.WriteLine(shortenedPost);
+
+            #region Linq
+
+            #region Comentado
+            //var books = new CSharpAdvance.LINQ.BookRepository().GetBooks();
+
+            ////LINQ Query Opératos.
+            //var cheaperBooks =
+            //        from b in books
+            //        where b.Price < 10
+            //        orderby b.Title
+            //        select b;
+
+            //// LINQ Extensions Methods.
+            //// With select (.Select(x => x.Title)) you can converto a list o objects into a list of one object, for example
+            //// In this case, we convert a List<Book>, into a List<string>.
+
+            //var cheapBooks = books
+            //                    .Where(x => x.Price < 10)
+            //                    .OrderBy(x => x.Title)
+            //                    .Select(x => x.Title);
+
+            //foreach (var item in cheapBooks)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //// This two operations are similar. 
+            #endregion
+
+            var books = new CSharpAdvance.LINQ.BookRepository().GetBooks();
+
+            // LINQ Extensions Methods.
+
+            // Skip salta los primeros 2 en este caso
+            // Take, toma los 3 siguientes despues del skip.
+            //var pagedBooks = books.Skip(2).Take(3);
+
+            //foreach (var item in pagedBooks)
+            //{
+            //    Console.WriteLine(item.Title + " " + item.Price);
+            //}
+
+            // Get the most highest value from the list.
+            var maxPriceFromList = books.Max(x => x.Price);
+            var moreChipperFromList = books.Min(x => x.Price);
+            Console.WriteLine(maxPriceFromList);
+            Console.WriteLine(moreChipperFromList);
+
+
+            #endregion
         }
 
         #region Delegates
@@ -147,6 +199,6 @@ namespace CSharpAdvance
         //}
         #endregion
 
-        
+
     }
 }
