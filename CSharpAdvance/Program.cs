@@ -173,6 +173,23 @@ namespace CSharpAdvance
 
 
             #endregion
+
+            //DateTime? date = null;
+
+            //Console.WriteLine("GetValueOrDefault: " + date.GetValueOrDefault());
+            //Console.WriteLine("HasValue: " + date.HasValue);
+            //Console.WriteLine("Value: " + date.Value);// Get an exeption here because the value is null.
+
+            //DateTime? date = new DateTime(2014,1,1);
+            //DateTime date2 = date.GetValueOrDefault();// This way we avoid the mark from Compiler.
+            //DateTime? date3 = date2;// In this case there is no neccesary to use method GetValueOrDefault();
+
+            DateTime? date = null;
+            // If like a if/else.
+            DateTime date2 = date ?? DateTime.Today;
+            DateTime date3 = (date != null ? date.GetValueOrDefault() : DateTime.Today);
+
+            Console.WriteLine(date2);
         }
 
         #region Delegates
